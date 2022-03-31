@@ -43,9 +43,8 @@ aside {
     width:20%;
     flex-grow:1;
     float:right;
-    box-shadow: 5px 5px #525252;
     border: 1px gray;
-    list-style-type: none !important;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
 }
 
 aside h3 {
