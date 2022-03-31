@@ -37,6 +37,33 @@ header nav li{
     float:left;
 }
 
+/*Fiche signalétique*/
+aside {
+    width:20%;
+    flex-grow:1;
+    float:right;
+    box-shadow: 5px 5px #525252;
+    border: 1px gray;
+    list-style-type: none !important;
+}
+
+aside h3 {
+    padding-left: 10px;
+    background: #F5763F;
+    color: white;
+}
+
+aside ul {
+    padding-left: 20px;
+    list-style-type: none !important;
+}
+
+#articles {
+    width: 78%;
+    flex-grow: 1;
+    float:left;
+}
+
 /*menu des pages non active*/
 header nav li a{
     display: block;
