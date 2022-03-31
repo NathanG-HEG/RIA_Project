@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,400i,700|Roboto+Slab:700');
+
+* {
+    box-sizing: border-box;
+}
+
+/*En-tête de toutes les pages avec le titre et le background orange*/
+header h1{
+    padding: 40px;
+    padding-bottom: 0px;
+    text-align: center;
+    background: linear-gradient(#FFDEA6, #F5763F);
+    color: white;
+    border-bottom-width: 20px;
+    border-bottom-color: #EE6743;
+    border-bottom-style: solid;  
+    margin-bottom: 0px;
+    margin: 0px;
+}
+
+
+header nav ul{
+    background: #525252;
+    padding-left: 10px;
+    height: 30px;
+    list-style-type: none;
+    overflow: hidden;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+header nav ul .active{
+     background-color:white; 
+}
+
+header nav li{
+    float:left;
+}
+
+/*menu des pages non active*/
+header nav li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 7px 15px;
+    text-decoration: none;
+    
+}
+
+
+/* la page active*/
+header nav li.active a {
+	background-color: white;
+	color:red;	
+    font-weight: bold;
+}
+
+
+.hamburger{
+    display: none;
+}
+
+
+/*Bordure grise sous le titre de la page*/
+#articles h2{
+    border-bottom-style: solid;
+    border-bottom-color: lightgrey;
+    border-bottom-width: 1px;
+    margin-bottom: 0px;
+}
+
+/*Auteurs du projet avec l'heure*/
+#articles header p{
+    margin-top: 0px;
+    text-align: end;
+    color: darkgray;
+}
+
+
+
+@media screen and (max-width: 480px) {
+  nav {
+    background: red;
+  }
+}
+
+
+footer{
+    background: #525252;
+    text-align: center;
+    position:fixed;
+    bottom:0;left: 0; right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
