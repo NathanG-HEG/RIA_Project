@@ -10,15 +10,15 @@ header h1{
     padding: 40px;
     padding-bottom: 0px;
     text-align: center;
-    background: linear-gradient(#FFDEA6, #F5763F);
+    background: linear-gradient(#F2B99C, #E36734);
     color: white;
     border-bottom-width: 20px;
-    border-bottom-color: #EE6743;
+    border-bottom-color: #DB5123;
     border-bottom-style: solid;  
     margin-bottom: 0px;
     margin: 0px;
+    font-family: Flamante Serif Bold otf;
 }
-
 
 header nav ul{
     background: #525252;
