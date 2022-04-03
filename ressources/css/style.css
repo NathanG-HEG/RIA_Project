@@ -51,6 +51,9 @@ aside h3 {
     padding-left: 10px;
     background: #F5763F;
     color: white;
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 aside ul {
