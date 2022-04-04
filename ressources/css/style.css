@@ -120,12 +120,7 @@ footer img {
 }
 
 
-
-
-
-
-
-/*si en dessous de 480px le menu change*/
+/*si en dessous de 480px*/
 @media (max-width: 480px) {
 
     header h1{
@@ -142,6 +137,13 @@ footer img {
     display: block;
     text-align: center;
 }
+
+    aside {
+    width: 100%;
+    float:left;
+    text-align: center;
+}
+
 
     header nav ul{
     display: grid;
