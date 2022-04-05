@@ -21,9 +21,14 @@ header h1{
     font-family: Roboto slab;
 }
 
-#mockup {
+.mockup {
         height: auto;
-        max-width: 85%;
+        max-width: 100%;
+}
+
+.maquette {
+    height: auto;
+    max-width: 50%;
 }
 
 header nav ul{
