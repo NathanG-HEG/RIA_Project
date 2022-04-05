@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.google.com/schemas/sitemap/0.84"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="http://www.google.com/schemas/sitemap/0.84
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.google.com/schemas/sitemap/0.84
 http://www.google.com/schemas/sitemap/0.84/sitemap.xsd">
-<url>
-<loc>http://127.0.0.1:20661/</loc>
-</url>
-<url>
-<loc>http://127.0.0.1:20661/description.html</loc>
-</url>
-<url>
-<loc>http://127.0.0.1:20661/flux.html</loc>
-</url>
-<url>
-<loc>http://127.0.0.1:20661/journal_de_bord.html</loc>
-</url>
-<url>
-<loc>http://127.0.0.1:20661/maquettes.html</loc>
-</url>
-<url>
-<loc>http://127.0.0.1:20661/mockup.html</loc>
-</url>
+    <url>
+        <loc>http://127.0.0.1:20661/</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:20661/description.html</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:20661/flux.html</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:20661/journal_de_bord.html</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:20661/maquettes.html</loc>
+    </url>
+    <url>
+        <loc>http://127.0.0.1:20661/mockup.html</loc>
+    </url>
 </urlset>

@@ -6,13 +6,13 @@
 }
 
 body {
-	max-width: 1240px;
+    max-width: 1240px;
     margin: 0 auto;
 }
 
 
 /*En-tête de toutes les pages avec le titre et le background orange*/
-header h1{
+header h1 {
     padding: 40px;
     padding-bottom: 0px;
     text-align: center;
@@ -20,15 +20,15 @@ header h1{
     color: white;
     border-bottom-width: 20px;
     border-bottom-color: #DB5123;
-    border-bottom-style: solid;  
+    border-bottom-style: solid;
     margin-bottom: 0px;
     margin: 0px;
     font-family: Roboto slab;
 }
 
 .mockup {
-        height: auto;
-        max-width: 100%;
+    height: auto;
+    max-width: 100%;
 }
 
 .maquette {
@@ -37,7 +37,7 @@ header h1{
     max-width: 40%;
 }
 
-header nav ul{
+header nav ul {
     background: #525252;
     padding-left: 10px;
     height: 30px;
@@ -47,19 +47,19 @@ header nav ul{
     margin-bottom: 20px;
 }
 
-header nav ul .active{
-     background-color:white; 
+header nav ul .active {
+    background-color: white;
 }
 
-header nav li{
-    float:left;
+header nav li {
+    float: left;
 }
 
 /*Fiche signalétique*/
 aside {
-    width:20%;
-    flex-grow:1;
-    float:right;
+    width: 20%;
+    flex-grow: 1;
+    float: right;
     border: 1px gray;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 5px 15px;
 }
@@ -81,35 +81,35 @@ aside ul {
 #articles {
     width: 78%;
     flex-grow: 1;
-    float:left;
+    float: left;
 }
 
 /*menu des pages non active*/
-header nav li a{
+header nav li a {
     display: block;
     color: white;
     text-align: center;
     padding: 7px 15px;
     text-decoration: none;
-    
+
 }
 
 
 /* la page active*/
 header nav li.active a {
-	background-color: white;
-	color:red;	
+    background-color: white;
+    color: red;
     font-weight: bold;
 }
 
 
-.hamburger{
+.hamburger {
     display: none;
 }
 
 
 /*Bordure grise sous le titre de la page*/
-#articles h2{
+#articles h2 {
     border-bottom-style: solid;
     border-bottom-color: lightgrey;
     border-bottom-width: 1px;
@@ -117,126 +117,123 @@ header nav li.active a {
 }
 
 /*Auteurs du projet avec l'heure*/
-#articles header p{
+#articles header p {
     margin-top: 0px;
     text-align: end;
     color: darkgray;
 }
 
 
-
-footer{
+footer {
     background: #525252;
     text-align: center;
     padding: 12px;
-    position:fixed;
-    bottom:0;left: 0; right: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 /*taille du logo hes-so*/
 footer img {
-      max-width: 12%;
-      height: auto;
+    max-width: 12%;
+    height: auto;
 }
-
-
 
 
 /*si en dessous de 800px (mode mobile paysage)*/
 @media (max-width: 800px) {
 
     html, body {
-   margin:0;
-   padding:0;
-   height:100%;
-    padding-bottom: 115%;
-    position: relative;
-}
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        padding-bottom: 115%;
+        position: relative;
+    }
 
     aside {
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
-    float:left;
-    text-align: center;
-    height: auto;
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
+        float: left;
+        text-align: center;
+        height: auto;
 
-}
-
-
-
-    header h1{
-    font-size: 25px
-}
-
-     #articles {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-     height: auto;
-}
+    }
 
 
-      footer{
-          position: absolute;
+    header h1 {
+        font-size: 25px
+    }
+
+    #articles {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        height: auto;
+    }
+
+
+    footer {
+        position: absolute;
         bottom: 0;
 
     }
 }
 
 
-
 /*si en dessous de 480px (mode mobile portrait)*/
 @media (max-width: 480px) {
 
     html, body {
-   height:100%;
-    padding-bottom: 310%;
-    position: relative;
-}
+        height: 100%;
+        padding-bottom: 310%;
+        position: relative;
+    }
 
 
-    header h1{
-    font-size: 25px
-}
+    header h1 {
+        font-size: 25px
+    }
 
- #articles {
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
-     height: auto;
-}
+    #articles {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        height: auto;
+    }
 
 
-    .hamburger{
-    display: block;
-    text-align: center;
-    filter: invert(100%);
-}
+    .hamburger {
+        display: block;
+        text-align: center;
+        filter: invert(100%);
+    }
 
     aside {
-    margin-left: 10%;
-    margin-right: 10%;
-    width: 80%;
-    float:left;
-    text-align: center;
-    height: auto;
-}
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
+        float: left;
+        text-align: center;
+        height: auto;
+    }
 
 
-    header nav ul{
-    display: grid;
-    width:auto;
-    height: auto;
-    padding-left: 0px;
-}
+    header nav ul {
+        display: grid;
+        width: auto;
+        height: auto;
+        padding-left: 0px;
+    }
 
-    header nav li a{
-       text-align: center;
-}
+    header nav li a {
+        text-align: center;
+    }
 
 
-    footer{
+    footer {
         position: absolute;
         bottom: 0;
 
