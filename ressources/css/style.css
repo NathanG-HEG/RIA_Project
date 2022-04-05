@@ -5,6 +5,11 @@
     font-family: Helvetica, sans-serif;
 }
 
+body {
+	max-width: 1240px;
+    margin: 0 auto;
+}
+
 
 /*En-tête de toutes les pages avec le titre et le background orange*/
 header h1{
@@ -27,8 +32,9 @@ header h1{
 }
 
 .maquette {
+    display: block;
     height: auto;
-    max-width: 50%;
+    max-width: 40%;
 }
 
 header nav ul{
