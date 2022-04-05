@@ -5,6 +5,7 @@
     font-family: Helvetica, sans-serif;
 }
 
+
 /*En-tête de toutes les pages avec le titre et le background orange*/
 header h1{
     padding: 40px;
@@ -128,8 +129,61 @@ footer img {
 }
 
 
-/*si en dessous de 480px*/
+
+
+/*si en dessous de 800px (mode mobile paysage)*/
+@media (max-width: 800px) {
+
+    html, body {
+   margin:0;
+   padding:0;
+   height:100%;
+    padding-bottom: 115%;
+    position: relative;
+}
+
+    aside {
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    float:left;
+    text-align: center;
+    height: auto;
+
+}
+
+
+
+    header h1{
+    font-size: 25px
+}
+
+     #articles {
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+     height: auto;
+}
+
+
+      footer{
+          position: absolute;
+        bottom: 0;
+
+    }
+}
+
+
+
+/*si en dessous de 480px (mode mobile portrait)*/
 @media (max-width: 480px) {
+
+    html, body {
+   height:100%;
+    padding-bottom: 310%;
+    position: relative;
+}
+
 
     header h1{
     font-size: 25px
@@ -139,17 +193,23 @@ footer img {
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
+     height: auto;
 }
+
 
     .hamburger{
     display: block;
     text-align: center;
+    filter: invert(100%);
 }
 
     aside {
-    width: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
     float:left;
     text-align: center;
+    height: auto;
 }
 
 
@@ -164,9 +224,12 @@ footer img {
        text-align: center;
 }
 
-footer{
-    display: none;
-}
+
+    footer{
+        position: absolute;
+        bottom: 0;
+
+    }
 
 
 
