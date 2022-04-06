@@ -124,6 +124,46 @@ header nav li.active a {
 }
 
 
+
+#journalDeBord h2 {
+    border-bottom-style: solid;
+    border-bottom-color: lightgrey;
+    border-bottom-width: 1px;
+    margin-bottom: 0px;
+}
+
+
+#journalDeBord header p{
+     margin-top: 0px;
+    text-align: end;
+    color: darkgray;
+}
+
+
+#tableauDeBord {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#tableauDeBord th{
+  border: 1px solid #ddd;
+  padding: 8px;
+  background-color:#525252;
+  color: white;
+}
+
+#tableauDeBord td{
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tableauDeBord tr:nth-child(even){background-color: #f2f2f2;}
+
+#tableauDeBord tr:hover {background-color: #ddd;}
+
+
+
 footer {
     background: #525252;
     text-align: center;
