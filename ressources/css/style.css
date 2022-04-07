@@ -36,6 +36,10 @@ header h1 {
     height: auto;
     max-width: 40%;
 }
+#sitemap {
+    height: auto;
+    max-width: 100%;
+}
 
 header nav ul {
     background: #525252;
