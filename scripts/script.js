@@ -1,12 +1,19 @@
 const canvas = document.getElementById("mainCanvas");
 const ctx = canvas.getContext("2d");
 
+let start = true;
+let gameOver = false;
+let score = 0;
+let level = 0;
+
 const player_width = 140;
 const player_height = 88;
 const player_max_health = 1000;
 const player_projectiles = [];
 const projectiles_speed = 10;
 const projectileDelayMs = 250;
+const projectileWidth = 10;
+const projectileHeight = 2;
 let readyToShoot = true;
 let lastShot = Date.now();
 let player_health = player_max_health;
@@ -60,13 +67,13 @@ Player.prototype.draw = function () {
     if (activeKeys['shootLeft'] && readyToShoot) {
         //shoot
         player_health -= 2;
-        player_projectiles[player_projectiles.length] = new Projectile(this.x, this.y+player_height/2, true);
+        player_projectiles[player_projectiles.length] = new Projectile(this.x, this.y + player_height / 2, true);
         lastShot = Date.now();
     }
     if (activeKeys['shootRight'] && readyToShoot) {
         //shoot
         player_health -= 2;
-        player_projectiles[player_projectiles.length] = new Projectile(this.x + player_width-10, this.y+player_height/2, false);
+        player_projectiles[player_projectiles.length] = new Projectile(this.x + player_width - 10, this.y + player_height / 2, false);
         lastShot = Date.now();
     }
     // player clamp
@@ -133,39 +140,63 @@ smallEnemyImage.onload = function () {
 };
 smallEnemyImage.src = "ressources/images/game_object/small_enemy_28px.png";
 
-SmallEnemy.prototype.draw= function(pos){
+SmallEnemy.prototype.draw = function (pos) {
 
     // enemy movement
-    if(this.left){
+    if (this.left) {
         this.x -= smallEnemySpeed;
-    }else{
+    } else {
         this.x += smallEnemySpeed;
     }
-    if(this.up){
+    if (this.up) {
         this.y -= smallEnemySpeed;
-    }else{
+    } else {
         this.y += smallEnemySpeed;
     }
 
     // enemy collision
-    if(collisionSmallEnemy(player, this)) {
+    //  with player
+    if (enemyCollidePlayer(player, this)) {
         player_health -= 300;
         smallEnemies.splice(pos, 1);
     }
+    // with projectile
+    for (let i = 0; i < player_projectiles.length; i++) {
+        if (enemyCollideProjectile(player_projectiles[i], this)) {
+            score++;
+            smallEnemies.splice(pos, 1);
+        }
+    }
 
     // enemy clamp
-    if (this.x < 0) {
-        this.left = !this.left;
+    if (this.x < 1) {
+        this.left = false;
     }
-    if (this.y < 0) {
-        this.up = !this.up;
+    if (this.y < 1) {
+        this.up = false;
     }
     if (this.x + smallEnemyWidth > canvas.width) {
-        this.left = !this.left;
+        this.left = true;
     }
     if (this.y + smallEnemyHeight > canvas.height) {
-        this.up = !this.up;
+        this.up = true;
     }
+}
+
+// Collisions functions
+
+function enemyCollidePlayer(player, a) {
+    return (player.x < a.x + smallEnemyWidth &&
+        player.x + player_width > a.x &&
+        player.y + 30 < a.y + smallEnemyHeight &&
+        player_height + player.y -10 > a.y);
+}
+
+function enemyCollideProjectile(projectile, a) {
+    return (projectile.x < a.x + smallEnemyWidth &&
+        projectile.x + projectileWidth > a.x &&
+        projectile.y < a.y + smallEnemyHeight &&
+        projectileHeight + projectile.y > a.y);
 }
 
 // Draw everything
@@ -212,18 +243,11 @@ function rgb(r, g, b) {
     return ["rgb(", r, ",", g, ",", b, ")"].join("");
 }
 
-function collisionSmallEnemy(player, a){
-    return (player.x < a.x + smallEnemyWidth &&
-        player.x + player_width > a.x &&
-        player.y < a.y + smallEnemyHeight &&
-        player_height+ player.y > a.y);
-}
-
-
 // The main game loop
 let main = function () {
+    gameOver = false;
     let now = Date.now();
-    let delta = now - then;
+    //let delta = now - then;
     //update(delta / 1000);
     //console.log(delta);
 
@@ -233,16 +257,49 @@ let main = function () {
     render();
     then = now;
 
+    // player lost
+    if (player_health <= 0) {
+        player_health = 0;
+        gameOver = true;
+    }
+
+    // next level
+    if (smallEnemies.length === 0) {
+        level++;
+        console.log(level);
+        // Spawn enemies
+        let nbEnemy = 2 * level - 1;
+        for (let i = 0; i < nbEnemy; i++) {
+            let y = Math.random() * canvas.height;
+            let x = Math.random() * canvas.width;
+            let e = new SmallEnemy(x, y, x % 2 === 0, y % 2 === 0);
+            // Ensure enemies don't spawn in the player
+            if (enemyCollidePlayer(player, e)) {
+                i--;
+                continue;
+            }
+            smallEnemies[i] = e;
+        }
+    }
+
+    // dashboard update
+    document.getElementById("currentScore").innerText = "Score: " + score;
+    document.getElementById("currentLevel").innerText = "Level: " + level;
+
     /* ### debug ### */
 
+    /*
     if (player_health < 0) {
         player_health = player_max_health;
     }
+    */
     /* ### end debug ### */
     // Request to do this again ASAP
     requestAnimationFrame(main);
 };
 
+
+// keycodes
 function setKeysTo(e, state) {
     if (e.keyCode === 37 || e.keyCode === 65) {
         activeKeys['left'] = state;
@@ -279,11 +336,16 @@ requestAnimationFrame = w.requestAnimationFrame
 let then = Date.now();
 //reset();
 /* ### DEBUG ### */
+/*
 for(let i = 0; i<5;i++){
     let x = Math.random()*canvas.width;
     let y = Math.random()*canvas.height;
     smallEnemies[i] = new SmallEnemy(x, y, x%2===0, y%2===0)
 }
+*/
 /* ### END DEBUG ### */
+
+
 main();
+
 
