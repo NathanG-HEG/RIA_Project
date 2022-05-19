@@ -1,7 +1,6 @@
 const canvas = document.getElementById("mainCanvas");
 const ctx = canvas.getContext("2d");
 
-let start = true;
 let gameOver = false;
 let score = 0;
 let level = 0;
@@ -10,7 +9,7 @@ const player_width = 140;
 const player_height = 88;
 const player_max_health = 1000;
 const player_projectiles = [];
-const projectiles_speed = 10;
+const projectiles_speed = 15;
 const projectileDelayMs = 250;
 const projectileWidth = 10;
 const projectileHeight = 2;
@@ -18,15 +17,22 @@ let readyToShoot = true;
 let lastShot = Date.now();
 let player_health = player_max_health;
 canvas.width = 960;
-canvas.height = 480;
+canvas.height = 720;
 const playerSpeed = 5;
 let activeKeys = [];
+
+//Healing point
+const healingPerPoint = 333;
+const healingPointWidth = 45;
+const healingPointHeight = 45;
+let healingPoint = null;
 
 //enemies
 const smallEnemyWidth = 28;
 const smallEnemyHeight = 25;
 const smallEnemies = [];
-const smallEnemySpeed = 4;
+const smallEnemySpeed = 3;
+const smallEnemyDamage = 200;
 
 // Background image
 let bgReady = false;
@@ -34,7 +40,7 @@ const bgImage = new Image();
 bgImage.onload = function () {
     bgReady = true;
 };
-bgImage.src = "ressources/images/game_object/star_background_960x480.jpg";
+bgImage.src = "ressources/images/game_object/star_background_960x720.jpg";
 
 // Player
 let Player = function (x, y) {
@@ -124,6 +130,29 @@ Projectile.prototype.draw = function (pos) {
     }
 }
 
+// Healing point
+let healingPointReady = false;
+const healingPointImage = new Image();
+
+let HealingPoint = function(x,y){
+    this.x = x;
+    this.y = y;
+    healingPointImage.onload = function(){
+        healingPointReady = true;
+    }
+    healingPointImage.src = "ressources/images/game_object/small_enemy_28px.png";
+}
+
+HealingPoint.prototype.draw = function(){
+    if(healingPointCollidePlayer(player, this)){
+        if(player_health+healingPerPoint<player_max_health){
+            player_health+=healingPerPoint;
+        }else{
+            player_health = player_max_health;
+        }
+        healingPoint = null;
+    }
+}
 
 // Small enemies
 let SmallEnemy = function (x, y, left, up) {
@@ -157,7 +186,7 @@ SmallEnemy.prototype.draw = function (pos) {
     // enemy collision
     //  with player
     if (enemyCollidePlayer(player, this)) {
-        player_health -= 300;
+        player_health -= smallEnemyDamage;
         smallEnemies.splice(pos, 1);
     }
     // with projectile
@@ -184,6 +213,13 @@ SmallEnemy.prototype.draw = function (pos) {
 }
 
 // Collisions functions
+
+function healingPointCollidePlayer(player, a){
+    return (player.x < a.x + healingPointWidth &&
+        player.x + player_width > a.x &&
+        player.y + 30 < a.y + healingPointHeight &&
+        player_height + player.y -10 > a.y);
+}
 
 function enemyCollidePlayer(player, a) {
     return (player.x < a.x + smallEnemyWidth &&
@@ -213,6 +249,13 @@ let render = function () {
             player_projectiles[i].draw(i);
         }
     }
+    if(healingPoint!=null){
+        if(healingPointReady){
+            ctx.drawImage(healingPointImage, healingPoint.x, healingPoint.y);
+            healingPoint.draw();
+        }
+    }
+
     for (let i = 0; i < smallEnemies.length; i++) {
         if (smallEnemyReady) {
             ctx.drawImage(smallEnemyImage, smallEnemies[i].x, smallEnemies[i].y);
@@ -274,13 +317,18 @@ let main = function () {
             let x = Math.random() * canvas.width;
             let e = new SmallEnemy(x, y, x % 2 === 0, y % 2 === 0);
             // Ensure enemies don't spawn in the player
-            if (enemyCollidePlayer(player, e)) {
+            if (enemyCollidePlayer(player, e)){
                 i--;
                 continue;
             }
             smallEnemies[i] = e;
         }
+        if(level%3 === 0){
+            //Spawn healing point
+            healingPoint = new HealingPoint(Math.random() * canvas.height,Math.random() * canvas.width);
+        }
     }
+
 
     // dashboard update
     document.getElementById("currentScore").innerText = "Score: " + score;
