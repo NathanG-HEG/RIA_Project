@@ -32,6 +32,12 @@ header h1 {
     max-width: 100%;
 }
 
+#lostLocation {
+    display: table;
+    margin: 0 auto;
+    font-size: large;
+}
+
 .maquette {
     display: block;
     height: auto;

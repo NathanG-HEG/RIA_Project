@@ -237,19 +237,19 @@ let render = function () {
         ctx.drawImage(bgImage, 0, 0);
     }
 
-    if (player_health>750){
+    if (player_health > 750) {
         // Between 751 and MAX
         playerImage.src = "ressources/images/game_object/player_140px.png";
-    } else if (player_health>500){
+    } else if (player_health > 500) {
         // Between 501 and 750
         playerImage.src = "ressources/images/game_object/player_750hp_140px.png";
-    } else if(player_health>250){
+    } else if (player_health > 250) {
         // Between 251 and 500
         playerImage.src = "ressources/images/game_object/player_500hp_140px.png";
-    } else if (player_health>1){
+    } else if (player_health > 1) {
         // Between 1 and 250
         playerImage.src = "ressources/images/game_object/player_250hp_140px.png";
-    } else{
+    } else {
         playerImage.src = "ressources/images/game_object/player_0hp_140px.png"
     }
 
@@ -340,6 +340,12 @@ let main = function () {
                 //Spawn healing point
                 healingPoint = new HealingPoint(Math.random() * canvas.height, Math.random() * canvas.width);
             }
+            //display user coordinates
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(setUserLocation, setUserLocationEmpty);
+            } else {
+                setUserLocationEmpty();
+            }
         }
     }
 
@@ -386,6 +392,17 @@ document.onkeydown = function (e) {
 document.onkeyup = function (e) {
     return setKeysTo(e, false);
 };
+
+//user location
+function setUserLocation(position) {
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+    document.getElementById("lostLocation").innerText = "Spaceship coordinates\t\t[Latitude: " + latitude + "\tLongitude: " + longitude + "]";
+}
+
+function setUserLocationEmpty(error) {
+    document.getElementById("lostLocation").innerText = "";
+}
 
 // Cross-browser support for requestAnimationFrame
 let w = window;
