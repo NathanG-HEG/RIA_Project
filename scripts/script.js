@@ -1,7 +1,7 @@
 const canvas = document.getElementById("mainCanvas");
 const ctx = canvas.getContext("2d");
 
-let gameOver = false;
+gameOver = false;
 let score = 0;
 let level = 0;
 
