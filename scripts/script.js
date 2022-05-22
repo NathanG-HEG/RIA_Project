@@ -68,12 +68,14 @@ Player.prototype.draw = function () {
     }
     if (activeKeys['shootLeft'] && readyToShoot) {
         //shoot
+        makeSound("ressources/audio/blaster.mp3");
         player_health -= 2;
         player_projectiles[player_projectiles.length] = new Projectile(this.x, this.y + player_height / 2, true);
         lastShot = Date.now();
     }
     if (activeKeys['shootRight'] && readyToShoot) {
         //shoot
+        makeSound("ressources/audio/blaster.mp3");
         player_health -= 2;
         player_projectiles[player_projectiles.length] = new Projectile(this.x + player_width - 10, this.y + player_height / 2, false);
         lastShot = Date.now();
@@ -402,6 +404,12 @@ function setUserLocation(position) {
 
 function setUserLocationEmpty(error) {
     document.getElementById("lostLocation").innerText = "";
+}
+
+//sounds
+function makeSound(soundPath) {
+   var audio = new Audio(soundPath);
+   audio.play();
 }
 
 // Cross-browser support for requestAnimationFrame
