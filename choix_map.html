@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="ressources/css/style.css">
-</head>
 
+
+</head>
 <body>
 <header>
     <h1>HES-SO Vs - 624-2 - HTML/CSS/JavaScript</h1>
@@ -37,18 +38,22 @@
         </ul>
     </nav>
 </header>
-<main>
-    <div id="dashboard">
-        <span id="currentScore">Score: </span>
-        <span id="lostLocation"></span>
-        <span id="highScore">High-score: </span>
-        <p id="currentLevel">Current level: </p>
-    </div>
-    <canvas id="mainCanvas"></canvas>
-</main>
+
+<h2>Where are you heading ?</h2>
+<img id="star_map" class="map" src="ressources/images/game_object/star_background_960x720.jpg" draggable="true" ondragstart="drag(event)">
+<img id="saturn_map" class="map" src="ressources/images/game_object/saturn_background.jpg" draggable="true" ondragstart="drag(event)">
+<img id="black_hole_map" class="map" src="ressources/images/game_object/black_hole_background.jpg" draggable="true" ondragstart="drag(event)">
+
+<br/>
+<br/>
+
+<div id="dropZone" onDrop="drop(event)" ondragover="allowDrop(event)">
+    Drop a map here.
+</div>
+
 <footer>
     <img id="logo" src="ressources/images/logo.png">
 </footer>
-<script src="scripts/script.js"></script>
+<script src="scripts/choixMap.js"></script>
 </body>
 </html>
