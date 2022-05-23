@@ -351,6 +351,21 @@ let render = function () {
         ctx.fillStyle = rgb(100, 194, 168);
         ctx.textAlign = "center";
         ctx.fillText("GAME OVER!", canvas.width / 2, canvas.height / 2);
+        ctx.font = "32px Arial";
+        ctx.fillStyle = rgb(100, 194, 168);
+        ctx.textAlign = "center";
+        ctx.fillText("Press SPACEBAR to start again", canvas.width / 2, canvas.height / 2 + 60);
+        if(activeKeys['spacebar']){
+            player_health = player_max_health;
+            level = 0;
+            score = 0;
+            player.x = canvas.width / 2 - player_width / 2;
+            player.y = canvas.height / 2;
+            enemies.splice(0, enemies.length);
+            weaponPoint = null;
+            healingPoint = null;
+            gameOver = false;
+        }
     }
     // Health bar
     ctx.fillStyle = '#CCC';
@@ -445,6 +460,8 @@ function setKeysTo(e, state) {
         activeKeys['shootLeft'] = state;
     } else if (e.keyCode === 69 || e.keyCode === 75) {
         activeKeys['shootRight'] = state;
+    } else if(e.keyCode === 32) {
+        activeKeys['spacebar'] = state;
     }
     return false;
 }
