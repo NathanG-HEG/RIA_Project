@@ -1,7 +1,7 @@
 const canvas = document.getElementById("mainCanvas");
 const ctx = canvas.getContext("2d");
 
-let gameOver = false;
+gameOver = false;
 let score = 0;
 let level = 0;
 
@@ -48,7 +48,10 @@ const bgImage = new Image();
 bgImage.onload = function () {
     bgReady = true;
 };
-bgImage.src = "ressources/images/game_object/star_background_960x720.jpg";
+
+//bgImage.src = "ressources/images/game_object/star_background_960x720.jpg";
+bgImage.src = sessionStorage.getItem("chosenMap");
+
 
 // Player
 let Player = function (x, y) {
