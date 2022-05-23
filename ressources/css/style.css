@@ -70,7 +70,7 @@ header h1 {
     border-top: 1px solid white;
     border-radius: 20px;
     padding: 20px;
-    width: 400px;
+    width: auto;
     height: 100px;
     line-height: 65px;
     transition: all 0.2s ease-in-out;
@@ -82,7 +82,7 @@ header h1 {
 #form_div {
     align-content: center;
     margin: auto;
-    width: 400px;
+    width: 33%;
     height: auto;
     border-bottom: 5000px;
     margin-bottom: 12%;
