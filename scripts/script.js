@@ -24,7 +24,7 @@ const playerSpeed = 5;
 let activeKeys = [];
 
 //Weapon point
-const weaponPointWidth = 45;
+const weaponPointWidth = 17;
 const weaponPointHeight = 45;
 const weaponTimeToLive = 10000;
 let weaponPoint = null;
