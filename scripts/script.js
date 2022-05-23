@@ -10,9 +10,11 @@ const player_height = 88;
 const player_max_health = 1000;
 const player_projectiles = [];
 const projectiles_speed = 15;
-const projectileDelayMs = 250;
 const projectileWidth = 10;
 const projectileHeight = 2;
+
+let projectileDelayMs = 250;
+let projectileCost = 2;
 let readyToShoot = true;
 let lastShot = Date.now();
 let player_health = player_max_health;
@@ -20,6 +22,12 @@ canvas.width = 960;
 canvas.height = 720;
 const playerSpeed = 5;
 let activeKeys = [];
+
+//Weapon point
+const weaponPointWidth = 45;
+const weaponPointHeight = 45;
+const weaponTimeToLive = 10000;
+let weaponPoint = null;
 
 //Healing point
 const healingPerPoint = 333;
@@ -69,14 +77,14 @@ Player.prototype.draw = function () {
     if (activeKeys['shootLeft'] && readyToShoot) {
         //shoot
         makeSound("ressources/audio/blaster.mp3");
-        player_health -= 2;
+        player_health -= projectileCost;
         player_projectiles[player_projectiles.length] = new Projectile(this.x, this.y + player_height / 2, true);
         lastShot = Date.now();
     }
     if (activeKeys['shootRight'] && readyToShoot) {
         //shoot
         makeSound("ressources/audio/blaster.mp3");
-        player_health -= 2;
+        player_health -= projectileCost;
         player_projectiles[player_projectiles.length] = new Projectile(this.x + player_width - 10, this.y + player_height / 2, false);
         lastShot = Date.now();
     }
@@ -104,10 +112,6 @@ let Projectile = function (x, y, left) {
 
 let projectileReady = false;
 const projectileImage = new Image();
-projectileImage.onload = function () {
-    projectileReady = true;
-};
-projectileImage.src = "ressources/images/game_object/projectile_10x2.png";
 
 Projectile.prototype.draw = function (pos) {
     if (this.left) this.x -= projectiles_speed;
@@ -149,6 +153,29 @@ HealingPoint.prototype.draw = function () {
             player_health = player_max_health;
         }
         healingPoint = null;
+    }
+}
+
+// Weapon point
+let weaponPointReady = false;
+const weaponPointImage = new Image();
+let gotWeaponTime = null;
+
+let WeaponPoint = function (x, y) {
+    this.x = x;
+    this.y = y;
+    weaponPointImage.onload = function () {
+        weaponPointReady = true;
+    }
+    weaponPointImage.src = "ressources/images/game_object/weapon_point_45px.png";
+}
+
+WeaponPoint.prototype.draw = function () {
+    if (weaponPointCollidePlayer(player, this)) {
+        gotWeaponTime = Date.now();
+        projectileCost = 0;
+        projectileDelayMs = 50;
+        weaponPoint = null;
     }
 }
 
@@ -211,6 +238,12 @@ SmallEnemy.prototype.draw = function (pos) {
 }
 
 // Collisions functions
+function weaponPointCollidePlayer(player, a) {
+    return (player.x < a.x + weaponPointWidth &&
+        player.x + player_width > a.x &&
+        player.y + 30 < a.y + weaponPointHeight &&
+        player_height + player.y - 10 > a.y);
+}
 
 function healingPointCollidePlayer(player, a) {
     return (player.x < a.x + healingPointWidth &&
@@ -235,10 +268,12 @@ function enemyCollideProjectile(projectile, a) {
 
 // Draw everything
 let render = function () {
+    //Background
     if (bgReady) {
         ctx.drawImage(bgImage, 0, 0);
     }
 
+    //Player
     if (player_health > 750) {
         // Between 751 and MAX
         playerImage.src = "ressources/images/game_object/player_140px.png";
@@ -254,19 +289,46 @@ let render = function () {
     } else {
         playerImage.src = "ressources/images/game_object/player_0hp_140px.png"
     }
-
     playerImage.onload = function () {
         playerReady = true;
     };
     if (playerReady) {
         ctx.drawImage(playerImage, player.x, player.y);
     }
+
+    //Projectiles
     for (let i = 0; i < player_projectiles.length; i++) {
+        if (gotWeaponTime != null) {
+            projectileImage.src = "ressources/images/game_object/projectile2_10x2.png";
+        } else {
+            projectileImage.src = "ressources/images/game_object/projectile_10x2.png";
+        }
+        projectileImage.onload = function () {
+            projectileReady = true;
+        };
         if (projectileReady) {
             ctx.drawImage(projectileImage, player_projectiles[i].x, player_projectiles[i].y);
             player_projectiles[i].draw(i);
         }
     }
+
+    //Weapon point
+    if (weaponPoint != null) {
+        if (weaponPointReady) {
+            ctx.drawImage(weaponPointImage, weaponPoint.x, weaponPoint.y);
+            weaponPoint.draw();
+        }
+    }
+
+    if (gotWeaponTime != null) {
+        if (gotWeaponTime + weaponTimeToLive < Date.now()) {
+            projectileDelayMs = 250;
+            projectileCost = 2;
+            gotWeaponTime = null;
+        }
+    }
+
+    //Healing point
     if (healingPoint != null) {
         if (healingPointReady) {
             ctx.drawImage(healingPointImage, healingPoint.x, healingPoint.y);
@@ -274,6 +336,7 @@ let render = function () {
         }
     }
 
+    // Enemies
     for (let i = 0; i < enemies.length; i++) {
         if (smallEnemyReady) {
             ctx.drawImage(smallEnemyImage, enemies[i].x, enemies[i].y);
@@ -338,15 +401,12 @@ let main = function () {
                 }
                 enemies[i] = e;
             }
+            if (level % 5 === 0) {
+                weaponPoint = new WeaponPoint(Math.random() * canvas.width, Math.random() * canvas.height);
+            }
             if (level % 3 === 0) {
                 //Spawn healing point
-                healingPoint = new HealingPoint(Math.random() * canvas.height, Math.random() * canvas.width);
-            }
-            //display user coordinates
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(setUserLocation, setUserLocationEmpty);
-            } else {
-                setUserLocationEmpty();
+                healingPoint = new HealingPoint(Math.random() * canvas.width, Math.random() * canvas.height);
             }
         }
     }
@@ -408,8 +468,8 @@ function setUserLocationEmpty(error) {
 
 //sounds
 function makeSound(soundPath) {
-   var audio = new Audio(soundPath);
-   audio.play();
+    var audio = new Audio(soundPath);
+    audio.play();
 }
 
 // Cross-browser support for requestAnimationFrame
@@ -432,7 +492,12 @@ for(let i = 0; i<5;i++){
 */
 /* ### END DEBUG ### */
 
-
+//display user coordinates
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(setUserLocation, setUserLocationEmpty);
+} else {
+    setUserLocationEmpty();
+}
 main();
 
 
