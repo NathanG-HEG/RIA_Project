@@ -15,8 +15,7 @@ function drop(ev) {
     //set chosen map in the local storage
     let chosenMap = document.getElementById(ev.dataTransfer.getData("text"));
     let chosenMapPath = chosenMap.getAttribute("src");
-    sessionStorage.clear();
-    sessionStorage.setItem("chosenMap", chosenMapPath);
+    localStorage.setItem("chosenMap", chosenMapPath);
 
     location.replace("jeu.html")
 }

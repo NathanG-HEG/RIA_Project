@@ -2,56 +2,64 @@
 <html lang="en">
 
 <head>
-	<title>624-2 - HTML/CSS/JavaScript</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="ressources/css/style.css">
-	<script src="scripts/script.js"></script>
+    <title>624-2 - HTML/CSS/JavaScript</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="ressources/css/style.css">
+    <script src="scripts/script.js"></script>
 </head>
 
-<body>
+<body class="black_background">
 <header>
-	<h1>HES-SO Vs - 624-2 - HTML/CSS/JavaScript</h1>
-	<nav>
-		<!-- Hamburger -->
-		<ul>
-			<li class="hamburger">
-				<img src="ressources/images/hamburger_icon.svg">
-			</li>
-			<li>
-				<a href="description.html">Description</a>
-			</li>
-			<li>
-				<a href="maquettes.html">Maquettes</a>
-			</li>
-			<li>
-				<a href="mockup.html">Mockup</a>
-			</li>
-			<li>
-				<a href="flux.html">Flux</a>
-			</li>
-			<li>
-				<a href="journal_de_bord.html">Journal de bord</a>
-			</li>
-			<li class="active">
-				<a href="jeu.html">Jeu</a>
-			</li>
-		</ul>
-	</nav>
+    <h1>HES-SO Vs - 624-2 - HTML/CSS/JavaScript</h1>
+    <nav>
+        <!-- Hamburger -->
+        <ul>
+            <li class="hamburger">
+                <img src="ressources/images/hamburger_icon.svg">
+            </li>
+            <li>
+                <a href="description.html">Description</a>
+            </li>
+            <li>
+                <a href="maquettes.html">Maquettes</a>
+            </li>
+            <li>
+                <a href="mockup.html">Mockup</a>
+            </li>
+            <li>
+                <a href="flux.html">Flux</a>
+            </li>
+            <li>
+                <a href="journal_de_bord.html">Journal de bord</a>
+            </li>
+            <li class="active">
+                <a href="menu.html">Jeu</a>
+            </li>
+        </ul>
+    </nav>
 </header>
-<main>
+<main class="black_background">
+    <h1 id="game_title">OVNI GAME</h1>
+    <div id="form_div">
+    <form class="big_form">
+        <input id="userName" type="text" value="Nom" maxlength="15" required/>
+    </form>
+    <br/>
+    <br/>
+    <form action="choix_map.html" class="big_form">
+        <input type="submit" value="PLAY" onclick="saveUserName()"/>
+    </form>
+    <br/>
+    <br/>
+    <form action="how_to_play.html" class="big_form">
+        <input type="submit" value="Comment jouer"/>
+    </form>
+    </div>
+    <footer>
+        <img id="logo" src="ressources/images/logo.png">
+    </footer>
+    <script src="scripts/menu.js"></script>
 </main>
-<form>
-	<input type="text" value="Nom"/>
-</form>
-<form action="jeu.html">
-	<input type="submit" value="PLAY" />
-</form>
-<form action="how_to_play.html">
-	<input type="submit" value="Comment jouer" />
-</form>
-<footer>
-	<img id="logo" src="ressources/images/logo.png">
-</footer>
 </body>
 </html>

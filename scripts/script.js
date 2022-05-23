@@ -49,8 +49,7 @@ bgImage.onload = function () {
     bgReady = true;
 };
 
-//bgImage.src = "ressources/images/game_object/star_background_960x720.jpg";
-bgImage.src = sessionStorage.getItem("chosenMap");
+bgImage.src = localStorage.getItem("chosenMap");
 
 
 // Player
