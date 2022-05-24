@@ -55,14 +55,22 @@
 				Le joueur doit éliminer des vagues d’ennemis apparaissant en groupe selon le niveau (Règle 1). Le joueur
 				élimine les ennemis en tirant des projectiles qui lui consomment de la santé (Règle 2). Si un ennemi
 				touche le joueur, il perd également de la santé (Règle 3). La santé se régénère quand le joueur entre en
-				collision avec des points de santé apparaissant périodiquement (Règle 4).</p>
+				collision avec des points de santé apparaissant périodiquement (Règle 4 & 5). Des armes apparaîssent
+				périodiquement et améliore l'attaque du joueur (Règle 6, 7 & 8). Le joueur perd lorsqu'il n'a plus de
+				santé (Règle 9).</p>
 			<h3>Règles</h3>
-			<p>
-				1. Les ennemis apparaissent à chaque passage de niveau selon ce calcul : 2^niveau-1 .<br>
-				2. Chaque tir engendre 5 projectile et consomme 1% de la santé max.<br>
-				3. Lorsqu’un ennemi touche le joueur, il perd 30% de la santé max.<br>
-				4. Le joueur récupère 40% de la santé max lors de la collision avec un point de santé.
-			</p>
+			<ol>
+				<li>Des ennemis apparaissent à chaque niveau selon ce calcul : 2x niveau - 1.</li>
+				<li>Chaque tir engendre un projectile et consomme 0.2% de la santé maximale.</li>
+				<li>Lorsqu'un ennemi entre en collision avec un joueur, il perd 20% de la santé maximale.</li>
+				<li>Un point de santé apparaît chaque 3 niveaux.</li>
+				<li>Lorsque le joueur entre en collision avec le point de santé, il gagne un tiers de la santé maximale.</li>
+				<li>Une arme apparaît chaque 5 niveaux.</li>
+				<li>Lorsque le joueur entre en collision avec l'arme, il l'équipe automatiquement pour 10 secondes.</li>
+				<li>Lorsque le joueur est équipé d'une arme, il peut tirer sans perdre de vie et à un rythme plus élevé.</li>
+				<li>Lorsque le joueur n'a plus de santé, il perd. Il peut recommencer au niveau 1 en pressant la barre
+					d'espace.</li>
+			</ol>
 			<h3>Sitemap</h3>
             <img id="sitemap" src="ressources/images/sitemap.png"/>
 			<h5>HTML</h5>

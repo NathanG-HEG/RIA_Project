@@ -262,6 +262,27 @@ header nav li.active a {
     color: darkgray;
 }
 
+.Commands{
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 66%;
+}
+
+.Commands th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: rgb(0,194,168);
+    color: white;
+}
+
+.Commands td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.Commands tr:nth-child(even) {
+    background-color: whitesmoke;
+}
 
 #tableauDeBord {
     font-family: Arial, Helvetica, sans-serif;

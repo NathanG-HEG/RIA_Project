@@ -40,7 +40,58 @@
 		</ul>
 	</nav>
 </header>
-
+<main>
+	<h3>COMMANDES</h3>
+	<table class="Commands">
+		<thead>
+		<tr>
+			<th>Touche</th>
+			<th>Action</th>
+		</tr>
+		</thead>
+		<tr>
+			<td>'A', 'Left arrow'</td>
+			<td>Naviguer vers la gauche</td>
+		</tr>
+		<tr>
+			<td>'W', 'Up arrow'</td>
+			<td>Naviguer vers le haut</td>
+		</tr>
+		<tr>
+			<td>'S', 'Down arrow'</td>
+			<td>Naviguer vers le bas</td>
+		</tr>
+		<tr>
+			<td>'D', 'Right arrow'</td>
+			<td>Naviguer vers la droite</td>
+		</tr>
+		<tr>
+			<td>'Q', 'J'</td>
+			<td>Tirer à gauche</td>
+		</tr>
+		<tr>
+			<td>'E', 'K'</td>
+			<td>Tirer à droite</td>
+		</tr>
+		<tr>
+			<td>'Space bar'</td>
+			<td>(Quand GameOver) Recommencer</td>
+		</tr>
+	</table>
+	<h3>REGLES</h3>
+	<ul>
+		<li>Des ennemis apparaissent à chaque niveau selon ce calcul : 2x niveau - 1.</li>
+		<li>Chaque tir engendre un projectile et consomme 0.2% de la santé maximale.</li>
+		<li>Lorsqu'un ennemi entre en collision avec un joueur, il perd 20% de la santé maximale.</li>
+		<li>Un point de santé chaque 3 niveaux.</li>
+		<li>Lorsque le joueur entre en collision avec le point de santé, il gagne un tiers de la santé maximale.</li>
+		<li>Une arme apparaît chaque 5 niveaux.</li>
+		<li>Lorsque le joueur entre en collision avec l'arme, il l'équipe automatiquement pour 10 secondes.</li>
+		<li>Lorsque le joueur est équipé d'une arme, il peut tirer sans perdre de vie et à un rythme plus élevé.</li>
+		<li>Lorsque le joueur n'a plus de santé, il perd. Il peut recommencer au niveau 1 en pressant la barre
+			d'espace.</li>
+	</ul>
+</main>
 <footer>
 	<img id="logo" src="ressources/images/logo.png">
 </footer>
