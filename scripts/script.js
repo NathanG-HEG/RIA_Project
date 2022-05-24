@@ -347,6 +347,7 @@ let render = function () {
     }
 
     if (gameOver) {
+        updateLeaderBoard();
         ctx.font = "60px Arial";
         ctx.fillStyle = rgb(100, 194, 168);
         ctx.textAlign = "center";
@@ -355,7 +356,7 @@ let render = function () {
         ctx.fillStyle = rgb(100, 194, 168);
         ctx.textAlign = "center";
         ctx.fillText("Press SPACEBAR to start again", canvas.width / 2, canvas.height / 2 + 60);
-        if(activeKeys['spacebar']){
+        if (activeKeys['spacebar']) {
             player_health = player_max_health;
             level = 0;
             score = 0;
@@ -460,7 +461,7 @@ function setKeysTo(e, state) {
         activeKeys['shootLeft'] = state;
     } else if (e.keyCode === 69 || e.keyCode === 75) {
         activeKeys['shootRight'] = state;
-    } else if(e.keyCode === 32) {
+    } else if (e.keyCode === 32) {
         activeKeys['spacebar'] = state;
     }
     return false;
@@ -489,6 +490,31 @@ function setUserLocationEmpty(error) {
 function makeSound(soundPath) {
     var audio = new Audio(soundPath);
     audio.play();
+}
+
+function updateLeaderBoard() {
+    let userName = localStorage.getItem("userName");
+    let ldbStorage = JSON.parse(localStorage.getItem("leaderBoard"));
+    if (ldbStorage == null) {
+        ldbStorage = {
+            "leaderBoard": [
+                {"userName": "n", "score": "0"},
+                {"userName": "n", "score": "0"},
+                {"userName": "n", "score": "0"},
+                {"userName": "n", "score": "0"},
+                {"userName": "n", "score": "0"}
+            ]
+        };
+    }
+    for (let i = 0; i < ldbStorage.leaderBoard.length; i++) {
+        if (score > ldbStorage.leaderBoard[i].score) {
+            ldbStorage.leaderBoard[i].score = score;
+            ldbStorage.leaderBoard[i].userName = userName;
+            break;
+        }
+    }
+
+    localStorage.setItem("leaderBoard", JSON.stringify(ldbStorage))
 }
 
 // Cross-browser support for requestAnimationFrame
