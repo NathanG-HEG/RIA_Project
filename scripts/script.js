@@ -4,6 +4,7 @@ const ctx = canvas.getContext("2d");
 gameOver = false;
 let score = 0;
 let level = 0;
+let scoreSaved = false;
 
 const player_width = 140;
 const player_height = 88;
@@ -347,7 +348,11 @@ let render = function () {
     }
 
     if (gameOver) {
-        updateLeaderBoard();
+        if (!scoreSaved) {
+            updateLeaderBoard();
+            scoreSaved = true;
+        }
+        saved = true
         ctx.font = "60px Arial";
         ctx.fillStyle = rgb(100, 194, 168);
         ctx.textAlign = "center";
@@ -357,6 +362,7 @@ let render = function () {
         ctx.textAlign = "center";
         ctx.fillText("Press SPACEBAR to start again", canvas.width / 2, canvas.height / 2 + 60);
         if (activeKeys['spacebar']) {
+            scoreSaved = false;
             player_health = player_max_health;
             level = 0;
             score = 0;
@@ -493,7 +499,7 @@ function makeSound(soundPath) {
 }
 
 function updateLeaderBoard() {
-    let userName = localStorage.getItem("userName");
+    let username = localStorage.getItem("userName");
     let ldbStorage = JSON.parse(localStorage.getItem("leaderBoard"));
     if (ldbStorage == null) {
         ldbStorage = {
@@ -506,15 +512,66 @@ function updateLeaderBoard() {
             ]
         };
     }
+
+    //store the user position if he already exists in the leaderboard
+    let existingNameLocation = findUserInBoard(username, ldbStorage);
+
     for (let i = 0; i < ldbStorage.leaderBoard.length; i++) {
+        let leadArray = ldbStorage.leaderBoard;
+
+        //register the user in the leaderboard
         if (score > ldbStorage.leaderBoard[i].score) {
-            ldbStorage.leaderBoard[i].score = score;
-            ldbStorage.leaderBoard[i].userName = userName;
+            if (existingNameLocation == -1) {
+                registerNewLeader(username, ldbStorage, i);
+            } else {
+                updateExistingLeader(ldbStorage, i, existingNameLocation);
+            }
             break;
         }
     }
-
     localStorage.setItem("leaderBoard", JSON.stringify(ldbStorage))
+
+}
+
+function findUserInBoard(username, ldbStorage) {
+    for (let i = 0; i < ldbStorage.leaderBoard.length; i++) {
+            if (username == ldbStorage.leaderBoard[i].userName) {
+                return i;
+            }
+    }
+    return -1;
+}
+
+function updateExistingLeader(ldbStorage, i, existingNameLocation) {
+    //if the new score is greater that the current, update it
+    if (score > ldbStorage.leaderBoard[existingNameLocation].score) {
+
+        //set his new score
+        ldbStorage.leaderBoard[existingNameLocation].score = score;
+
+        //moves the user up the leaderboard if his new score allows him to
+        for (let j = existingNameLocation-1; j >= 0; j--) {
+            if (score > ldbStorage.leaderBoard[j].score) {
+                switchElementInArray(ldbStorage.leaderBoard, j, existingNameLocation);
+            } else {
+                break;
+            }
+        }
+    }
+}
+
+function registerNewLeader(username, ldbStorage, i) {
+    //user does not exist in the leaderboard, no need to remove him
+    let newLeader = {username, score};
+    ldbStorage.leaderBoard.splice(i, 0, newLeader);
+    ldbStorage.leaderBoard[i].userName = username; //without this line the username is set to undefined
+    ldbStorage.leaderBoard.pop(); //remove last user with is no longer a leader
+}
+
+function switchElementInArray(array, index1, index2) {
+    let temp = array[index1];
+    array[index1] = array[index2];
+    array[index2] = temp;
 }
 
 // Cross-browser support for requestAnimationFrame

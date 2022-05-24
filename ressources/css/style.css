@@ -84,7 +84,6 @@ header h1 {
     margin: auto;
     width: 33%;
     height: auto;
-    border-bottom: 5000px;
     margin-bottom: 12%;
 }
 
@@ -103,6 +102,48 @@ header h1 {
 
 .black_background {
     background-color: black;
+}
+
+#leaderBoard_div {
+    font-family: "Roboto Slab";
+    font-size: 5vh;
+    border-radius: 5px;
+    border: solid;
+    border-width: thick;
+    width: 50%;
+    border-color: #FAC809;
+    text-align: center;
+    margin:  auto;
+    magin-bottom: 15%;
+}
+
+#leaderBoard_div > p {
+
+}
+
+#trophy {
+    align-content: center;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    height: auto;
+    width: 20%;
+}
+
+.centered_div {
+    justify-content: center;
+    display: flex;
+    margin: auto;
+}
+
+.centered_text {
+    text-align: center;
+}
+
+#leaderBoard_title {
+    text-align: center;
+    font-size: 6vh;
+    font-family: "Roboto Slab";
 }
 
 #sitemap {
