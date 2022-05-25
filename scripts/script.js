@@ -524,7 +524,7 @@ function updateLeaderBoard() {
             if (existingNameLocation == -1) {
                 registerNewLeader(username, ldbStorage, i);
             } else {
-                updateExistingLeader(ldbStorage, i, existingNameLocation);
+                updateExistingLeader(ldbStorage, existingNameLocation);
             }
             break;
         }
@@ -542,7 +542,7 @@ function findUserInBoard(username, ldbStorage) {
     return -1;
 }
 
-function updateExistingLeader(ldbStorage, i, existingNameLocation) {
+function updateExistingLeader(ldbStorage, existingNameLocation) {
     //if the new score is greater that the current, update it
     if (score > ldbStorage.leaderBoard[existingNameLocation].score) {
 
@@ -552,7 +552,8 @@ function updateExistingLeader(ldbStorage, i, existingNameLocation) {
         //moves the user up the leaderboard if his new score allows him to
         for (let j = existingNameLocation-1; j >= 0; j--) {
             if (score > ldbStorage.leaderBoard[j].score) {
-                switchElementInArray(ldbStorage.leaderBoard, j, existingNameLocation);
+                switchElementInArray(ldbStorage.leaderBoard, existingNameLocation, j);
+                existingNameLocation--;
             } else {
                 break;
             }
@@ -569,9 +570,12 @@ function registerNewLeader(username, ldbStorage, i) {
 }
 
 function switchElementInArray(array, index1, index2) {
-    let temp = array[index1];
-    array[index1] = array[index2];
-    array[index2] = temp;
+    let tempName = array[index1].userName;
+    let tempScore = array[index1].score;
+    array[index1].userName = array[index2].userName;
+    array[index1].score = array[index2].score;
+    array[index2].userName = tempName;
+    array[index2].score = tempScore;
 }
 
 // Cross-browser support for requestAnimationFrame
