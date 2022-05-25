@@ -79,6 +79,23 @@ header h1 {
 
 }
 
+.big_button {
+    background: #0fda9d;
+    box-shadow: 20px 20px 40px -6px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    color: white;
+    height: 100px;
+    line-height: 65px;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    align-content: center;
+    font: large;
+}
+
 #form_div {
     align-content: center;
     margin: auto;
@@ -92,7 +109,7 @@ header h1 {
     background-color: #0fda9d;
     text-align: center;
     color: white;
-    border: none    ;
+    border: none;
 }
 
 #game_title {
