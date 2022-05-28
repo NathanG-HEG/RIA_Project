@@ -537,9 +537,9 @@ function updateLeaderBoard() {
 
 function findUserInBoard(username, ldbStorage) {
     for (let i = 0; i < ldbStorage.leaderBoard.length; i++) {
-            if (username == ldbStorage.leaderBoard[i].userName) {
-                return i;
-            }
+        if (username == ldbStorage.leaderBoard[i].userName) {
+            return i;
+        }
     }
     return -1;
 }
@@ -552,7 +552,7 @@ function updateExistingLeader(ldbStorage, existingNameLocation) {
         ldbStorage.leaderBoard[existingNameLocation].score = score;
 
         //moves the user up the leaderboard if his new score allows him to
-        for (let j = existingNameLocation-1; j >= 0; j--) {
+        for (let j = existingNameLocation - 1; j >= 0; j--) {
             if (score > ldbStorage.leaderBoard[j].score) {
                 switchElementInArray(ldbStorage.leaderBoard, existingNameLocation, j);
                 existingNameLocation--;
@@ -561,6 +561,17 @@ function updateExistingLeader(ldbStorage, existingNameLocation) {
             }
         }
     }
+}
+
+function displayHighScore() {
+    let ldbStorage = JSON.parse(localStorage.getItem("leaderBoard"));
+    let max = 0;
+    for (let b of ldbStorage.leaderBoard) {
+        if (b.score > max) {
+            max = b.score;
+        }
+    }
+    document.getElementById("highScore").innerText = "High-score: "+max;
 }
 
 function registerNewLeader(username, ldbStorage, i) {
@@ -606,6 +617,7 @@ if (navigator.geolocation) {
 } else {
     setUserLocationEmpty();
 }
+displayHighScore();
 main();
 
 
