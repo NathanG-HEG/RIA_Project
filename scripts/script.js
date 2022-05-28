@@ -371,6 +371,8 @@ let render = function () {
             enemies.splice(0, enemies.length);
             weaponPoint = null;
             healingPoint = null;
+            projectileDelayMs = 250;
+            projectileCost = 2;
             gameOver = false;
         }
     }
