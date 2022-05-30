@@ -110,6 +110,11 @@ header h1 {
     text-align: center;
     color: white;
     border: none;
+
+}
+
+.big_form > input::placeholder {
+    color: white;
 }
 
 #game_title {
@@ -123,7 +128,7 @@ header h1 {
 
 #leaderBoard_div {
     font-family: "Roboto Slab";
-    font-size: 5vh;
+    font-size: 4vh;
     border-radius: 5px;
     border: solid;
     border-width: thick;
