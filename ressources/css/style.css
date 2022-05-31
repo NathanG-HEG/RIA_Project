@@ -123,7 +123,7 @@ header h1 {
 }
 
 .black_background {
-    background-color: black;
+    background-color: #333333;
 }
 
 #leaderBoard_div {
@@ -139,8 +139,27 @@ header h1 {
     magin-bottom: 15%;
 }
 
-#leaderBoard_div > p {
+#dashboard {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: large;
+    font-family: "Roboto Slab";
+    color: #0fda9d;
+    border: 5px;
+    border-radius: 8px;
+    justify-content: center;
+}
 
+#dashboard > p {
+    margin-left: 1vh;
+}
+
+#lostLocation {
+    color: #0fda9d;
+    margin-bottom: 2ch;
 }
 
 #trophy {
