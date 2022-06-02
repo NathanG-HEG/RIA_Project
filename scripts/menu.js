@@ -4,7 +4,7 @@ function saveUserName() {
         alert('Choose your username before playing.')
         return;
     }
-    userName = userName.replace(/\s/g, ''); //get rid of spaces
+    userName = userName.trimEnd();
     localStorage.setItem("userName", userName);
     location.replace("choix_map.html")
 }
