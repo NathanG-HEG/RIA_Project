@@ -504,15 +504,7 @@ function updateLeaderBoard() {
     let username = localStorage.getItem("userName");
     let ldbStorage = JSON.parse(localStorage.getItem("leaderBoard"));
     if (ldbStorage == null) {
-        ldbStorage = {
-            "leaderBoard": [
-                {"userName": "n", "score": "0"},
-                {"userName": "n", "score": "0"},
-                {"userName": "n", "score": "0"},
-                {"userName": "n", "score": "0"},
-                {"userName": "n", "score": "0"}
-            ]
-        };
+        ldbStorage = initLeaderBoard();
     }
 
     //store the user position if he already exists in the leaderboard
@@ -531,8 +523,22 @@ function updateLeaderBoard() {
             break;
         }
     }
-    localStorage.setItem("leaderBoard", JSON.stringify(ldbStorage))
+    localStorage.setItem("leaderBoard", JSON.stringify(ldbStorage));
 
+}
+
+function initLeaderBoard() {
+    let ldbStorage = {
+        "leaderBoard": [
+            {"userName": "n", "score": "0"},
+            {"userName": "n", "score": "0"},
+            {"userName": "n", "score": "0"},
+            {"userName": "n", "score": "0"},
+            {"userName": "n", "score": "0"}
+        ]
+    };
+    localStorage.setItem("leaderBoard", JSON.stringify(ldbStorage))
+    return ldbStorage;
 }
 
 function findUserInBoard(username, ldbStorage) {
@@ -565,14 +571,22 @@ function updateExistingLeader(ldbStorage, existingNameLocation) {
 
 function displayHighScore() {
     let ldbStorage = JSON.parse(localStorage.getItem("leaderBoard"));
+
+    //if no leaderboard exist, create a blank one and set the current highscore to 0
+    if (ldbStorage == null) {
+        initLeaderBoard();
+        document.getElementById("highScore").innerText = "High-score: " + 0;
+        return;
+    }
     let max = 0;
     for (let b of ldbStorage.leaderBoard) {
         if (b.score > max) {
             max = b.score;
         }
     }
-    document.getElementById("highScore").innerText = "High-score: "+max;
+    document.getElementById("highScore").innerText = "High-score: " + max;
 }
+
 
 function registerNewLeader(username, ldbStorage, i) {
     //user does not exist in the leaderboard, no need to remove him
