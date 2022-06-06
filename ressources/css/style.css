@@ -6,9 +6,15 @@
 
 }
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
     max-width: 1240px;
     margin: 0 auto;
+    margin-bottom: 200px;
 }
 
 
@@ -355,16 +361,14 @@ footer {
     background: #525252;
     text-align: center;
     padding: 12px;
-    margin-top: 20px;
-    clear: both;
-    position: relative;
-    /*z-index: 1;*/
-    height: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
+
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     max-width: 1240px;
-    bottom: 0 !important;
+    white-space: nowrap;
+    margin-right: auto;
+    line-height: 60px;
 }
 
 /*taille du logo hes-so*/
